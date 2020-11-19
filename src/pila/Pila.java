@@ -11,8 +11,7 @@ public class Pila<Tipo> {
     }
 
     public boolean apilar(Tipo dato) {
-        lista.addDato(dato);
-        return false;
+        return lista.addDato(dato);
     }
 
     public Tipo desapilar() {

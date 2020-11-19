@@ -33,8 +33,7 @@ public class Lista<Tipo> {
      * Inserta un elemento nuevo al final de la lista
      * 
      * @param dato String con el dato a añadir a la lista
-     * @return devuelve true si el dato se añada satisfactoriamente. null, si no lo
-     *         hace
+     * @return devuelve true si el dato se añada satisfactoriamente. 
      */
     public boolean addDato(Tipo dato) {
         // if (dato == null)
@@ -49,7 +48,7 @@ public class Lista<Tipo> {
             nuevo.setAnterior(cola);
             cola = nuevo;
         }
-        return true;
+        return true; //TODO no seria necesario devolver. siempre inserta. pero por unificar
     }
 
     /**
