@@ -189,7 +189,7 @@ public class TestCola {
 
         System.out.println("Crear Pila");
         Pila<Object> miPila = new Pila<Object>();
-        miPila.imprimir();
+        miPila.print();
 
         ArrayList<String> lista0 = new ArrayList<String>();
         // Lista lista0 = new Lista();
@@ -219,59 +219,59 @@ public class TestCola {
 
         System.out.println("Aniadir un elemento \"lista0\"");
         miPila.apilar(lista0);
-        miPila.imprimir();
+        miPila.print();
 
         System.out.println("Aniadir un elemento \"lista1\"");
         miPila.apilar(lista1);
-        miPila.imprimir();
+        miPila.print();
 
         System.out.println("Aniadir un elemento \"lista2\"");
         miPila.apilar(lista2);
-        miPila.imprimir();
+        miPila.print();
 
         System.out.println("Aniadir un elemento \"lista3\"");
         miPila.apilar(lista3);
-        miPila.imprimir();
+        miPila.print();
 
         System.out.println("Aniadir un elemento \"lista4\"");
         miPila.apilar(lista4);
-        miPila.imprimir();
+        miPila.print();
 
         System.out.println("Aniadir un elemento \"cero\"");
         miPila.apilar("cero");
-        miPila.imprimir();
+        miPila.print();
 
         System.out.println("Aniadir un elemento \"uno\"");
         miPila.apilar("uno");
-        miPila.imprimir();
+        miPila.print();
 
         System.out.println("Aniadir un elemento \"dos\"");
         miPila.apilar("dos");
-        miPila.imprimir();
+        miPila.print();
 
         System.out.println("Aniadir un elemento \"tres\"");
         miPila.apilar("tres");
-        miPila.imprimir();
+        miPila.print();
 
         System.out.println("Aniadir un elemento \"Integer\"");
         miPila.apilar((Integer) 25);
-        miPila.imprimir();
+        miPila.print();
 
         System.out.println("Aniadir un elemento \"Long\"");
         miPila.apilar(new Long(68465465));
-        miPila.imprimir();
+        miPila.print();
 
         System.out.println("Aniadir un elemento \"Double\"");
         miPila.apilar((Double) 25.125);
-        miPila.imprimir();
+        miPila.print();
 
         System.out.println("Aniadir un elemento \"Boolean\"");
         miPila.apilar((Boolean) true);
-        miPila.imprimir();
+        miPila.print();
 
         System.out.println("Aniadir un elemento \"String\"");
         miPila.apilar("Esto es una cadena");
-        miPila.imprimir();
+        miPila.print();
 
         System.out.println("**************************************");
         System.out.println("*** Test aniadir datos en posicion ***");
@@ -282,73 +282,73 @@ public class TestCola {
             System.out.println("Se ha conseguido insertar");
         else
             System.out.println("No se ha conseguido insertar");
-        miPila.imprimir();
+        miPila.print();
 
         System.out.println("Insertar elemento en posicion 1");
         if (miPila.apilar("insert 1"))
             System.out.println("Se ha conseguido insertar");
         else
             System.out.println("No se ha conseguido insertar");
-        miPila.imprimir();
+        miPila.print();
 
         System.out.println("Insertar elemento en posicion 0");
         if (miPila.apilar("insert 0"))
             System.out.println("Se ha conseguido insertar");
         else
             System.out.println("No se ha conseguido insertar");
-        miPila.imprimir();
+        miPila.print();
 
         System.out.println("Reset Pila");
         miPila.inicializar();
-        miPila.imprimir();
+        miPila.print();
 
         System.out.println("Insertar elemento en posicion -1");
         if (miPila.apilar("insert -1"))
             System.out.println("Se ha conseguido insertar");
         else
             System.out.println("No se ha conseguido insertar");
-        miPila.imprimir();
+        miPila.print();
 
         System.out.println("Insertar elemento en posicion 10");
         if (miPila.apilar("insert 10"))
             System.out.println("Se ha conseguido insertar");
         else
             System.out.println("No se ha conseguido insertar");
-        miPila.imprimir();
+        miPila.print();
 
         System.out.println("Insertar elemento 'uno' en posicion 0");
         if (miPila.apilar("uno"))
             System.out.println("Se ha conseguido insertar");
         else
             System.out.println("No se ha conseguido insertar");
-        miPila.imprimir();
+        miPila.print();
 
         System.out.println("Insertar elemento 'dos' en posicion 0");
         if (miPila.apilar("dos"))
             System.out.println("Se ha conseguido insertar");
         else
             System.out.println("No se ha conseguido insertar");
-        miPila.imprimir();
+        miPila.print();
 
         System.out.println("Insertar elemento 'tres' en posicion 0");
         if (miPila.apilar("tres"))
             System.out.println("Se ha conseguido insertar");
         else
             System.out.println("No se ha conseguido insertar");
-        miPila.imprimir();
+        miPila.print();
 
         System.out.println("Insertar elemento en posicion 1");
         if (miPila.apilar("insert 1"))
             System.out.println("Se ha conseguido insertar");
         else
             System.out.println("No se ha conseguido insertar");
-        miPila.imprimir();
+        miPila.print();
 
         System.out.println("Insertar elemento en posicion 4");
         if (miPila.apilar("insert 4"))
             System.out.println("Se ha conseguido insertar");
         else
             System.out.println("No se ha conseguido insertar");
-        miPila.imprimir();
+        miPila.print();
     }
 }

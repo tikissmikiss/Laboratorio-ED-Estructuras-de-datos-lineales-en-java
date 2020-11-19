@@ -30,7 +30,7 @@ public class Pila<Tipo> {
         return lista.getLenght() == 0 ? true : false;
     }
 
-    public void limpiar() { // TODO es redundante
+    public void clear() { // TODO es redundante
         lista.clear();
     }
 
@@ -38,11 +38,11 @@ public class Pila<Tipo> {
         lista.clear();
     }
 
-    public void imprimir() {
+    public void print() {
         String str = "";
-        str += " n:" + getLength() + "\n";
-        str += " cima:" + getCima() + "\n";
-        str += " lista:\n" + lista;
+        str += "    n:" + getLength() + "\n";
+        str += "    cima:" + getCima() + "\n";
+        str += "    lista:\n" + lista;
         System.out.println(str);
     }
 

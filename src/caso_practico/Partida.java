@@ -46,7 +46,7 @@ public class Partida {
 
     private void imprimirBote() {
         System.out.println("Bote total:");
-        pilaBote.imprimir();
+        pilaBote.print();
     }
 
     private int contabilizarBote() {
