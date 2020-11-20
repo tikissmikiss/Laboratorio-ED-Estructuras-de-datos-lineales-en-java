@@ -146,7 +146,7 @@ public class UI {
 	    System.out.println("┃                 Lista - Pila - Cola                   ┃");
 	    System.out.println("┠───────────────────────────────────────────────────────┨");
 	    System.out.println("┃ Demostración de uso práctico de estructuras de datos. ┃");
-	    System.out.println("┃                                     por: José Herce   ┃");
+	    System.out.println("┃                            por: José Herce Preciado   ┃");
 	    System.out.println("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 	    System.out.println();
 	
