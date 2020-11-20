@@ -1,8 +1,13 @@
 package caso_practico;
 
+import caso_practico.blackjack.Baraja;
+import caso_practico.blackjack.Partida;
+import caso_practico.blackjack.Turno;
+import caso_practico.blackjack.Controlador;
+
 public class App {
     public static void main(String[] args) throws Exception {
-        UI ui = UI.iniciarUI();
+        Controlador ui = Controlador.iniciarUI();
         ui.iniciarPartida();
 
         Partida p = Partida.getPartida();

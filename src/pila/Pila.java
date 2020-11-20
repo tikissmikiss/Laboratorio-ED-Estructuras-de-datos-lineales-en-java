@@ -15,8 +15,8 @@ public class Pila<Tipo> {
     }
 
     public Tipo desapilar() {
-            return lista.sacarDato(lista.getLenght());
-        }
+        return lista.sacarDato(lista.getLenght() - 1);
+    }
 
     public Tipo getCima() {
         return lista.getDato(lista.getLenght() - 1);

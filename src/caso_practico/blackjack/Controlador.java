@@ -1,19 +1,19 @@
-package caso_practico;
+package caso_practico.blackjack;
 
 import caso_practico.util.io;
 
-public class UI {
+public class Controlador {
 	private Jugador[] jugadores;
 	private Partida p;
 
-	private static UI ui;
+	private static Controlador ui;
 
-	private UI() {
+	private Controlador() {
 	}
 
-	public static UI iniciarUI() {
+	public static Controlador iniciarUI() {
 		if (ui == null)
-			ui = new UI();
+			ui = new Controlador();
 		return ui;
 	}
 
@@ -30,7 +30,7 @@ public class UI {
 
 	public void iniciarPartida() {
 		if (ui == null)
-			ui = new UI();
+			ui = new Controlador();
 		int n = setNumeroJugadores();
 		// partida = Partida.;
 		// ui.marcador = new Marcador(n);
@@ -43,7 +43,8 @@ public class UI {
 	}
 
 	private static int setNumeroJugadores() {
-		int fig = io.leerInt("¿Cuantos jugadores jugaran la partida? [2-6] (por defecto 6)", 6);
+		// int fig = io.leerInt("¿Cuantos jugadores jugaran la partida? [2-6] (por defecto 6)", 6);
+		int fig = 6;
 		if (fig < 2 || fig > 6) {
 			System.out.println("Valor no permitido !!!");
 			fig = setFiguras();
@@ -74,9 +75,13 @@ public class UI {
 		System.out.println();
 	}
 
-	// public UI(Marcador marcador, Partida partida) {
-	// this.marcador = marcador;
-	// this.partida = partida;
-	// }
+	public void iniciarPartida(int i) {
+		if (ui == null)
+			ui = new Controlador();
+		ui.jugadores = new Jugador[i];
+		p = Partida.iniciarPartida(ui.jugadores);
+
+		System.out.println("Numero de jugadores: " + i);
+	}
 
 }

@@ -40,10 +40,10 @@ public class Cola<Tipo> {
 
     public void print() {
         String str = "";
-        str += "    n:" + getLength() + "\n";
-        str += "    ultimo:" + lista.getDato(getLength() - 1) + "\n"; // TODO 1 menos que el numero de elementos
-        str += "    primero:" + lista.getDato(0) + "\n";
-        str += "    lista:\n" + lista;
+        str += "    Elementos en cola: " + getLength() + "\n";
+        str += "    Ultimo:  " + lista.getDato(getLength() - 1) + "\n"; // TODO 1 menos que el numero de elementos
+        str += "    Primero: " + lista.getDato(0) + "\n";
+        str += "    Cola:\n" + lista;
         System.out.println(str);
     }
 

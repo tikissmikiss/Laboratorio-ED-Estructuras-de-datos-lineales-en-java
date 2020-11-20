@@ -1,4 +1,4 @@
-package caso_practico;
+package caso_practico.blackjack;
 
 import java.util.Random;
 
@@ -15,12 +15,22 @@ public class Baraja {
 
     private static Baraja b;
 
-    private Baraja(int numeroPalos, int numeroFiguras) {
-        this.numeroPalos = numeroPalos;
-        this.numeroFiguras = numeroFiguras;
-        mazo = new Cola<>();
-
+    public Baraja(int numeroPalos, int numeroFiguras) {
+        inicializar(numeroPalos, numeroFiguras);
         buildBaraja();
+    }
+
+    public Baraja(int numeroPalos, int numeroFiguras, int numBarajas) {
+        inicializar(numeroPalos, numeroFiguras);
+        for (int i = 0; i < numBarajas; i++) {
+            buildBaraja();
+        }
+    }
+
+    private void inicializar(int numeroPalos, int numeroFiguras) {
+        setNumeroPalos(numeroPalos);
+        setNumeroFiguras(numeroFiguras);
+        mazo = new Cola<>();
     }
 
     public static Baraja setBaraja(int numeroPalos, int numeroFiguras) {
@@ -39,7 +49,7 @@ public class Baraja {
                 mazo.encolar(new Carta(palos[i], figuras[j]));
             }
         }
-        mazo.print();
+        // mazo.print();
     }
 
     public boolean mezclar() {
@@ -47,22 +57,22 @@ public class Baraja {
         Random random = new Random(System.currentTimeMillis());
 
         for (int i = 0; i < NUMERO_MEZCLAS; i++) {
-            while (!b.mazo.isVacia()) {
+            while (!mazo.isVacia()) {
                 int insertPos = random.nextInt(aux1.getLenght() + 1);
-                aux1.addDato(b.mazo.desencolar(), insertPos);
+                aux1.addDato(mazo.desencolar(), insertPos);
                 // aux1.imprimirLista();
             }
 
             while (aux1.getLenght() > 0) {
                 int extracPos = random.nextInt(aux1.getLenght());
-                b.mazo.encolar(aux1.sacarDato(extracPos));
+                mazo.encolar(aux1.sacarDato(extracPos));
             }
         }
-        b.mazo.print();
+        // mazo.print();
         return true;
     }
 
-    public void setNumeroFiguras(int numeroFiguras) {
+    private void setNumeroFiguras(int numeroFiguras) {
         if (numeroFiguras < 1)
             this.numeroFiguras = 1;
         if (numeroFiguras > 15)
@@ -70,11 +80,7 @@ public class Baraja {
         this.numeroFiguras = numeroFiguras;
     }
 
-    public int getNumeroPalos() {
-        return numeroPalos;
-    }
-
-    public void setNumeroPalos(int numeroPalos) {
+    private void setNumeroPalos(int numeroPalos) {
         if (numeroFiguras < 1)
             this.numeroPalos = 1;
         if (numeroFiguras > 5)
@@ -82,17 +88,39 @@ public class Baraja {
         this.numeroPalos = numeroPalos;
     }
 
+    public int getLength() {
+        return mazo.getLength();
+    }
+
     public Carta darCarta() {
-        if (!b.mazo.isVacia())
-            return b.mazo.desencolar();
+        if (!mazo.isVacia())
+            return mazo.desencolar();
         return null;
     }
 
+    public Carta darCarta(VisibilidadCarta visibilidad) {
+        if (!mazo.isVacia()) {
+            Carta c = mazo.desencolar();
+            c.setVisibilidad(visibilidad);
+            return c;
+        }
+        return null;
+    }
+
+	public void meterCarta(Carta c) {
+        mazo.encolar(c);
+	}
+
     public void repartir(Jugador[] jugadores) {
         int i = 0;
-        while (!b.mazo.isVacia()) {
-            jugadores[i++ % jugadores.length].recibirCarta(b.mazo.desencolar());
+        while (!mazo.isVacia()) {
+            jugadores[i++ % jugadores.length].recibirCarta(mazo.desencolar());
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Baraja:\n" + mazo;
     }
 
 }

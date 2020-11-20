@@ -33,7 +33,7 @@ public class Lista<Tipo> {
      * Inserta un elemento nuevo al final de la lista
      * 
      * @param dato String con el dato a añadir a la lista
-     * @return devuelve true si el dato se añada satisfactoriamente. 
+     * @return devuelve true si el dato se añada satisfactoriamente.
      */
     public boolean addDato(Tipo dato) {
         // if (dato == null)
@@ -48,7 +48,7 @@ public class Lista<Tipo> {
             nuevo.setAnterior(cola);
             cola = nuevo;
         }
-        return true; //TODO no seria necesario devolver. siempre inserta. pero por unificar
+        return true; // TODO no seria necesario devolver. siempre inserta. pero por unificar
     }
 
     /**
@@ -322,8 +322,10 @@ public class Lista<Tipo> {
         } else {
             Nodo<Tipo> aux = cabeza;
             for (int i = 0; i < length; i++) {
-                str += "        [" + i + ": " + aux + "]\n";  //TODO MEM no hace falta aux.toString()
+                str += "        [ " + i + ": " + aux + " ]"; // TODO MEM no hace falta aux.toString()
                 aux = aux.getSiguiente();
+                if (aux != null)
+                    str += "\n";
             }
         }
         return str;

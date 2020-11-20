@@ -1,6 +1,6 @@
-package caso_practico;
+package caso_practico.blackjack;
 
-import caso_practico.Jugador.Estados;
+import caso_practico.blackjack.Jugador.Estados;
 import lista.Lista;
 
 public class Turno {
