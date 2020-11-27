@@ -1,4 +1,4 @@
-package caso_practico.blackjack;
+package demo.blackjack;
 
 enum VisibilidadCarta {
     DESCUBIERTA, CUBIERTA;

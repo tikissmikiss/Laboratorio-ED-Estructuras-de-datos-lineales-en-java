@@ -1,7 +1,7 @@
 package lista;
 
 
-public class Nodo<Tipo> {
+class Nodo<Tipo> {
     /*
      *************************************************************************
      * Atributos

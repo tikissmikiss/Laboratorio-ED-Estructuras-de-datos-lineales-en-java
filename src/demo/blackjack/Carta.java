@@ -1,16 +1,9 @@
-package caso_practico.blackjack;
-
-import caso_practico.util.Figura;
-import caso_practico.util.Palo;
+package demo.blackjack;
 
 public class Carta {
     private Palo palo;
     private Figura figura;
     private VisibilidadCarta visibilidad;
-
-    // private enum VisibilidadCarta {
-    // DESCUBIERTA, CUBIERTA;
-    // }
 
     public static VisibilidadCarta VISIBLE = VisibilidadCarta.DESCUBIERTA;
     public static VisibilidadCarta CUBIERTA = VisibilidadCarta.CUBIERTA;
@@ -21,31 +14,22 @@ public class Carta {
         this.visibilidad = VISIBLE;
     }
 
-    /**
-     * devuelve el valor aunque este cubierta
-     * @param all
-     * @return
-     */
     public int getValor() {
         return getValor(false);
     }
 
+    /**
+     * devuelve el valor aunque este cubierta
+     * 
+     * @param incluirCubiertas
+     * @return
+     */
     public int getValor(boolean incluirCubiertas) {
         if (visibilidad == VISIBLE || incluirCubiertas)
             return figura.getValor();
         else
             return 0;
     }
-    // public void setValor(Figura figura) {
-    // this.figura = figura;
-    // }
-
-    public Palo getPalo() {
-        return palo;
-    }
-    // public void setPalo(Palo palo) {
-    // this.palo = palo;
-    // }
 
     public void setVisibilidad(VisibilidadCarta visibilidad) {
         this.visibilidad = visibilidad;
@@ -60,7 +44,8 @@ public class Carta {
         if (visibilidad == VISIBLE)
             return "[" + figura + " - " + palo + "]";
         else
-            return "[  ♠  ♣  ♥  ♦  ]";
-        // return "[ ]";
+        // return "[  ♠  ♣  ♥  ♦  ]"; 
+        // return "[ <>  JOSE  <> ]"; 
+        return "[ <> <>  <> <> ]"; 
     }
 }

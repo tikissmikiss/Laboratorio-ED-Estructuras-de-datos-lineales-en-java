@@ -1,13 +1,14 @@
-package caso_practico;
+package demo;
 
-import caso_practico.blackjack.Baraja;
-import caso_practico.blackjack.Carta;
-import caso_practico.blackjack.Jugador;
-import caso_practico.blackjack.UI;
 import cola.Cola;
+import demo.blackjack.Baraja;
+import demo.blackjack.Carta;
+import demo.blackjack.Jugador;
+import demo.blackjack.UI;
+import demo.util.io;
 import pila.Pila;
 
-public class DemoEstructuras {
+public class DemoUsoTADs {
     private static final int NUM_JUGADORES = 6;
     private static final int NUM_RONDAS = 2;
     private static final int NUMERO_PALOS = 4;
@@ -24,36 +25,45 @@ public class DemoEstructuras {
 
         UI.textoCabecera();
 
-        System.out.println("Crear la cola de jugadores");
+        System.out.println("- Crear la cola de jugadores");
         jugCola = new Cola<>();
         for (int i = 1; i <= NUM_JUGADORES; i++)
             jugCola.encolar(new Jugador("Jugador_" + i));
-        System.out.println("Imprimir cola de jugadores");
+        System.out.println("- Imprimir cola de jugadores");
         jugCola.print();
+        io.esperarUsuario();
 
-        System.out.println("\nCrear Crupier");
+        System.out.println("\nCrear Crupier:");
         crupier = new Jugador("Crupier");
         System.out.println(crupier);
+        System.out.println();
+        // io.esperarUsuario();
 
         UI.textoCrearMazo();
         mazo = new Baraja(NUMERO_PALOS, NUMERO_FIGURAS, NUMERO_BARAJAS);
-        System.out.println("Imprimir mazo: Internamente utiliza el toString de una cola");
+        System.out.println("Imprimir mazo:");
+        System.out.println("Internamente utiliza el toString de una cola.");
+        io.esperarUsuario();
         System.out.println(mazo);
+        io.esperarUsuario();
 
         UI.textoMezclarMazo();
         mazo.mezclar();
-        System.out.println("Imprimir mazo mezclado:");
+        System.out.println("- Imprimir mazo mezclado:");
+        io.esperarUsuario();
         System.out.println(mazo);
+        io.esperarUsuario();
 
         UI.textoCrearPilaDescartes();
         pilaDescartes = new Pila<>();
 
-        System.out.println("\n>>>> Comienza la partida <<<<");
+        System.out.println("\n           **** Comienza la partida ****");
         for (int ronda = 1; ronda <= NUM_RONDAS; ronda++) {
             for (int i = 0; i < jugCola.getLength(); i++) {
 
                 System.out.println("\n- Se saca un jugador de la cola para jugar la ronda");
                 final Jugador jugador = jugCola.desencolar();
+                io.esperarUsuario();
 
                 UI.textoRepartirCartas();
                 jugador.recibirCarta(mazo.darCarta(Carta.VISIBLE));
@@ -65,6 +75,7 @@ public class DemoEstructuras {
                 if (crupier.getPuntuacion(true) == 21) {
                     UI.comprobarBJCrupier(ronda, jugador);
                 } else {
+                    System.out.println("No tiene Blackjack");
                     UI.trunoJugador(maxToPlay, ronda, jugador);
                     UI.turnoCrupier(ronda, jugador);
                 }
@@ -77,6 +88,7 @@ public class DemoEstructuras {
                 UI.textoImpresionMarcador();
                 jugCola.print();
                 System.out.println("           >   " + crupier + " <");
+                io.esperarUsuario();
 
                 UI.textoDescartarCartas();
                 while (!jugador.getMano().isVacia() || !crupier.getMano().isVacia()) {
