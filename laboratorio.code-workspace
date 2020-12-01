@@ -5,6 +5,7 @@
 		}
 	],
 	"settings": {
-		"java.dependency.packagePresentation": "hierarchical"
+		"java.dependency.packagePresentation": "hierarchical",
+		"workbench.colorTheme": "Sublime Material Theme - Dark"
 	}
 }

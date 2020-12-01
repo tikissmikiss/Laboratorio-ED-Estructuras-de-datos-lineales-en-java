@@ -1,7 +1,6 @@
 package demo.blackjack;
 
 import demo.DemoUsoTADs;
-// import demo.util;
 import demo.util.io;
 
 public class UI {
@@ -53,7 +52,7 @@ public class UI {
 	public static void turnoCrupier(int ronda, Jugador jugador) {
 		System.out.println();
 		System.out.println("- El crupier descubre su carta");
-		DemoUsoTADs.crupier.getMano().getCima().setVisibilidad(Carta.VISIBLE);
+		DemoUsoTADs.crupier.getMano().peek().setVisibilidad(Carta.VISIBLE);
 
 		boolean plantado = false;
 		while (!plantado) {
@@ -93,7 +92,7 @@ public class UI {
 
 	public static void comprobarBJCrupier(int ronda, Jugador jugador) {
 		System.out.println("- El crupier descubre su carta");
-		DemoUsoTADs.crupier.getMano().getCima().setVisibilidad(Carta.VISIBLE);
+		DemoUsoTADs.crupier.getMano().peek().setVisibilidad(Carta.VISIBLE);
 
 		UI.printMesa(ronda, jugador);
 		jugador.resetPuntuacion();
@@ -195,7 +194,6 @@ public class UI {
 				io.linea(" Mano " + jugador.getNombre() + "   >>> " + UI.stringPuntuacion(jugador) + " <<<", 60, "|"));
 		System.out.println(jugador.manoToString());
 		System.out.println(io.box('=', ancho, '='));
-		// io.esperarUsuario();
 	}
 
 	public static String stringPuntuacion(Jugador jugador) {

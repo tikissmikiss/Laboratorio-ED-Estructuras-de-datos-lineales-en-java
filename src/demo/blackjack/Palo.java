@@ -1,6 +1,6 @@
 package demo.blackjack;
 
-enum Palo {
+public enum Palo {
     ROMBOS("Rombos   "), PIKAS("Pikas    "), CORAZONES("Corazones"), TREBOLES("Treboles ");
 
     private String nombre;

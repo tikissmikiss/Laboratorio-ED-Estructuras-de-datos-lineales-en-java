@@ -48,4 +48,29 @@ public class Carta {
         // return "[ <>  JOSE  <> ]"; 
         return "[ <> <>  <> <> ]"; 
     }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((figura == null) ? 0 : figura.hashCode());
+        result = prime * result + ((palo == null) ? 0 : palo.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Carta other = (Carta) obj;
+        if (figura != other.figura)
+            return false;
+        if (palo != other.palo)
+            return false;
+        return true;
+    }
 }

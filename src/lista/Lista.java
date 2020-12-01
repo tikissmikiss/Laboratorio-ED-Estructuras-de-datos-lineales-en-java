@@ -1,15 +1,13 @@
 package lista;
 
-import java.util.ArrayList;
-
-public class Lista<T> {
+public class Lista<Tipo> {
     /*
      *************************************************************************
      * Atributos
      *************************************************************************/
 
-    private Nodo<T> cabeza;
-    private Nodo<T> cola;
+    private Nodo<Tipo> cabeza;
+    private Nodo<Tipo> cola;
     private int length;
 
     /*
@@ -32,20 +30,18 @@ public class Lista<T> {
      * @param dato String con el dato a añadir a la lista
      * @return devuelve true si el dato se añada satisfactoriamente.
      */
-    public boolean addDato(T dato) {
-        // if (dato == null)
-        // return false;
-        Nodo<T> nuevo = new Nodo<>(dato);
-        length++;
+    public boolean add(Tipo dato) {
+        Nodo<Tipo> nuevo = new Nodo<>(dato);
         if (cabeza == null) { // Si lista vacia
             cabeza = nuevo;
             cola = nuevo;
         } else { // Si mas de un elemento
-            cola.setSiguiente(nuevo);
-            nuevo.setAnterior(cola);
+            cola.siguiente(nuevo);
+            nuevo.anterior(cola);
             cola = nuevo;
         }
-        return true; // TODO no seria necesario devolver. siempre inserta. pero por unificar
+        length++;
+        return true;
     }
 
     /**
@@ -56,10 +52,10 @@ public class Lista<T> {
      * @return Devuelve true si la insercion se ha realizado con exito o false si no
      *         se ha podido insertar
      */
-    public boolean addDato(T dato, int posicion) {
+    public boolean add(Tipo dato, int posicion) {
         if (posicion == length)
-            return addDato(dato);
-        return addNodo(new Nodo<>(dato), buscarNodo(posicion));
+            return add(dato);
+        return addNodo(new Nodo<>(dato), getNodo(posicion));
     }
 
     /**
@@ -67,7 +63,7 @@ public class Lista<T> {
      * 
      * @return Entero con el numero de elementos que contiene la lista
      */
-    public int getLenght() {
+    public int size() {
         return length;
     }
 
@@ -78,10 +74,10 @@ public class Lista<T> {
      * @param dato Tipo con el dato que se desea sacar.
      * @return Retorna el dato del elemento encontrado o null si no lo lo encuentra
      */
-    public T sacarDato(T dato) {
-        Nodo<T> n = buscarNodo(new Nodo<>(dato), cabeza);
+    public Tipo extract(Tipo dato) {
+        Nodo<Tipo> n = getNodo(new Nodo<>(dato), cabeza);
         if (n != null) {
-            clearNodo(n);
+            remove(n);
             return dato; // n ya no tiene referencias
         }
         return null;
@@ -95,11 +91,11 @@ public class Lista<T> {
      * @return Retorna el dato del elemento sacado o null si posicion esta fuera de
      *         rango
      */
-    public T sacarDato(int posicion) {
-        Nodo<T> n = buscarNodo(posicion);
+    public Tipo extract(int posicion) {
+        Nodo<Tipo> n = getNodo(posicion);
         if (n != null) {
-            T obj = n.getDato();
-            clearNodo(n);
+            Tipo obj = n.dato();
+            remove(n);
             return obj; // n ya no tiene referencias
         }
         return null;
@@ -111,8 +107,8 @@ public class Lista<T> {
      * @param dato Tipo que se desea comprobar
      * @return true si esta, false si no esta
      */
-    public boolean comprobarDato(T dato) {
-        return buscarNodo(new Nodo<>(dato), cabeza) != null ? true : false;
+    public boolean check(Tipo dato) {
+        return getNodo(new Nodo<>(dato), cabeza) != null;
     }
 
     /**
@@ -122,10 +118,10 @@ public class Lista<T> {
      * @param dato Contenido a buscar
      * @return Posicion de la primera coincidencia. -1 si no hay coincidencia.
      */
-    public int getPosicion(T dato) {
+    public int indexOf(Tipo dato) {
         if (cabeza == null) // lista vacia?
             return -1;
-        return buscarPosicion(new Nodo<>(dato), cabeza, 0);
+        return indexOf(new Nodo<>(dato), cabeza, 0);
     }
 
     /**
@@ -136,8 +132,8 @@ public class Lista<T> {
      * @return Devuelve un Tipo con el contenido del nodo solicitado. Devuelve null
      *         si la posicion esta fuera de rango
      */
-    public String printPosicion(int posicion) {
-        Nodo<T> n = buscarNodo(posicion);
+    public String print(int posicion) {
+        Nodo<Tipo> n = getNodo(posicion);
         System.out.println(n);
         return n == null ? null : n.toString();
     }
@@ -149,16 +145,18 @@ public class Lista<T> {
      * @return El Nodo de la posicion seleccionada. Si la poscion esta fuera de
      *         rango se devuelve null
      */
-    public T getDato(int posicion) { // TODO añadir a memoria
+    public Tipo get(int posicion) {
         if (cabeza == null)
             return null;
-        return buscarNodo(posicion).getDato();
+
+        Nodo<Tipo> n = getNodo(posicion);
+        return n == null ? null : n.dato();
     }
 
     /**
      * Imprime por consola todos los elementos que contiene la lista.
      */
-    public void printLista() {
+    public void print() {
         String str = "";
         str += "    Longitud: " + length + "\n";
         str += "    Primero: " + cabeza + "\n";
@@ -190,24 +188,24 @@ public class Lista<T> {
      * si alguno de sus valores no es null para reenlazar la lista en la posicion de
      * extraccion.
      * 
-     * @param nuevo Nodo nuevo a insertar en la posicion del Nodo {@code nodo}
-     * @param nodo  Nodo de la posicion de insercion. Este sera el siguiente del
-     *              nuevo tras la insercion
+     * @param nNuevo     Nodo nuevo a insertar en la posicion del Nodo {@code nodo}
+     * @param nInsertPos Nodo de la posicion de insercion. Este sera el siguiente
+     *                   del nuevo tras la insercion
      * @return Devuelve true si la insercion se efectua correctamente.
      */
-    private boolean addNodo(Nodo<T> nuevo, Nodo<T> nodo) {
-        if (nuevo == nodo)
+    private boolean addNodo(Nodo<Tipo> nNuevo, Nodo<Tipo> nInsertPos) {
+        if (nNuevo == nInsertPos)
             return false;
-        if (nuevo == null || nodo == null)
+        if (nNuevo == null || nInsertPos == null)
             return false;
         // Desplaza el nodo actual y se inserta el nuevo delante
-        nuevo.setSiguiente(nodo); // apunta siguiente del nuevo al nodo actual
-        nuevo.setAnterior(nodo.getAnterior()); // apunta anterior del nuevo al nodo anterior del actual
-        if (nodo.getAnterior() != null) // Hay nodo delante del actual?
-            nodo.getAnterior().setSiguiente(nuevo); // pone el anterior al actual apuntando al nuevo
+        nNuevo.siguiente(nInsertPos); // apunta siguiente del nuevo al nodo actual
+        nNuevo.anterior(nInsertPos.anterior()); // apunta anterior del nuevo al nodo anterior del actual
+        if (nInsertPos.anterior() != null) // Hay nodo delante del actual?
+            nInsertPos.anterior().siguiente(nNuevo); // pone el anterior al actual apuntando al nuevo
         else // Si anterior es null el nuevo es ahora cabeza de lista
-            cabeza = nuevo;
-        nodo.setAnterior(nuevo); // apunta anterior del nodo actual al nuevo
+            cabeza = nNuevo;
+        nInsertPos.anterior(nNuevo); // apunta anterior del nodo actual al nuevo
         length++;
         return true;
     }
@@ -221,13 +219,13 @@ public class Lista<T> {
      * @return Devuelve el nodo de la poscion concreta. Devuelve null si la posicion
      *         solicitada esta fuera de rango
      */
-    private Nodo<T> buscarNodo(int posicion) {
+    private Nodo<Tipo> getNodo(int posicion) {
         if (posicion >= length || posicion < 0)
             return null;
         if (posicion <= length / 2)
-            return buscarNodo(cabeza, Sentido.AVANCE, posicion);
+            return getNodo(cabeza, Sentido.AVANCE, posicion);
         else
-            return buscarNodo(cola, Sentido.RETROCESO, length - posicion - 1);
+            return getNodo(cola, Sentido.RETROCESO, length - posicion - 1);
     }
 
     /**
@@ -238,17 +236,17 @@ public class Lista<T> {
      * @param sentido Sentido en el que recorrer la lista. AVANCE o false para
      *                recorrer de principio hacia adelante. RETROCESO o true, para
      *                recorrerla en sentido inverso.
-     * @param pos     Numero de posiciones restantes para alcanzar el nodo objetivo.
+     * @param nPos    Numero de posiciones restantes para alcanzar el nodo objetivo.
      * @return Devuelve el nodo en la posicion solicitada o null si lista vacia.
      */
-    private Nodo<T> buscarNodo(Nodo<T> nodo, Sentido sentido, int pos) {
+    private Nodo<Tipo> getNodo(Nodo<Tipo> nodo, Sentido sentido, int nPos) {
         if (nodo == null)
             return null;
-        if (pos != 0) {
+        if (nPos != 0) {
             if (sentido == Sentido.RETROCESO)
-                return buscarNodo(nodo.getAnterior(), sentido, --pos);
+                return getNodo(nodo.anterior(), sentido, --nPos);
             else
-                return buscarNodo(nodo.getSiguiente(), sentido, --pos);
+                return getNodo(nodo.siguiente(), sentido, --nPos);
         }
         return nodo;
     }
@@ -257,15 +255,15 @@ public class Lista<T> {
      * Busqueda recursiva de un nodo
      * 
      * @param nodoBuscado Nodo que se busca
-     * @param nodoActual        Nodo a comparar
+     * @param nodoActual  Nodo a comparar
      * @return Devuelve el nodo encontrado o null si no lo encuentra
      */
-    private Nodo<T> buscarNodo(Nodo<T> nodoBuscado, Nodo<T> nodoActual) {
+    private Nodo<Tipo> getNodo(Nodo<Tipo> nodoBuscado, Nodo<Tipo> nodoActual) {
         if (nodoActual == null || nodoBuscado == null) // algun nodo no inicializado?
             return null;
-        if (nodoActual.getDato() != nodoBuscado.getDato()) // no son iguales?
-            if (nodoActual.getSiguiente() != null) // no es el ultimo nodo?
-                return buscarNodo(nodoBuscado, nodoActual.getSiguiente());
+        if (!nodoActual.equals(nodoBuscado)) // no son iguales?
+            if (nodoActual.siguiente() != null) // no es el ultimo nodo?
+                return getNodo(nodoBuscado, nodoActual.siguiente());
             else
                 return null;
         return nodoActual;
@@ -274,19 +272,19 @@ public class Lista<T> {
     /**
      * Borra el nodo y enlaza la lista adecuadamente
      * 
-     * @param n Nodo que se desea borrar
+     * @param nodo Nodo que se desea borrar
      */
-    private void clearNodo(Nodo<T> n) {
+    private void remove(Nodo<Tipo> nodo) {
         length--;
-        if (n != cabeza) // no es el primer nodo?
-            n.getAnterior().setSiguiente(n.getSiguiente()); // enlazar anterior, con siguiente
+        if (nodo != cabeza) // no es el primer nodo?
+            nodo.anterior().siguiente(nodo.siguiente()); // enlazar anterior, con siguiente
         else
-            cabeza = n.getSiguiente(); // apuntar cabeza al siguiente
+            cabeza = nodo.siguiente(); // apuntar cabeza al siguiente
 
-        if (n != cola) // no es el ultimo nodo?
-            n.getSiguiente().setAnterior(n.getAnterior()); // enlazar siguiente, con anterior
+        if (nodo != cola) // no es el ultimo nodo?
+            nodo.siguiente().anterior(nodo.anterior()); // enlazar siguiente, con anterior
         else
-            cola = n.getAnterior(); // apuntar cola al anterior
+            cola = nodo.anterior(); // apuntar cola al anterior
     }
 
     /**
@@ -294,26 +292,18 @@ public class Lista<T> {
      * lista. Si hay coincidencia devuelve la posicion si no hay coincidencia, si no
      * hay coincidencia devuelve -1
      * 
-     * @param dato     Nodo buscado
-     * @param actual   Nodo a comparar
-     * @param posicion Posicion actual
+     * @param nBuscado  Nodo buscado
+     * @param nActual   Nodo a comparar
+     * @param posActual Posicion actual
      * @return Si no hay coincidencia devuelve la posicion, si no hay coincidencia
      *         devuelve -1
      */
-    private int buscarPosicion(Nodo<T> dato, Nodo<T> actual, int posicion) {
-        if (dato.getDato() == actual.getDato()) // coincide con cabeza?
-            return posicion;
-        if (actual.getSiguiente() != null) // hay mas nodos?
-            return buscarPosicion(dato, actual.getSiguiente(), ++posicion); // comparar siguiente
+    private int indexOf(Nodo<Tipo> nBuscado, Nodo<Tipo> nActual, int posActual) {
+        if (nBuscado.equals(nActual)) // coincide con cabeza?
+            return posActual;
+        if (nActual.siguiente() != null) // hay mas nodos?
+            return indexOf(nBuscado, nActual.siguiente(), ++posActual); // comparar siguiente
         return -1; // no encontrado
-    }
-
-    public T getCabeza() {
-        return cabeza.getDato();
-    }
-
-    public T getCola() {
-        return cola.getDato();
     }
 
     /*
@@ -327,15 +317,15 @@ public class Lista<T> {
      *************************************************************************/
 
     @Override
-    public String toString() { // TODO actualizar documentacion
+    public String toString() {
         String str = "";
         if (cabeza == null) {
-            str = "- Lista Vacia -\n";
+            str = "- Vacia -\n";
         } else {
-            Nodo<T> aux = cabeza;
+            Nodo<Tipo> aux = cabeza;
             for (int i = 0; i < length; i++) {
-                str += "        [ " + i + ": " + aux + " ]"; // TODO MEM no hace falta aux.toString()
-                aux = aux.getSiguiente();
+                str += "        [ " + i + ": " + aux + " ]"; 
+                aux = aux.siguiente();
                 if (aux != null)
                     str += "\n";
             }

@@ -7,42 +7,42 @@ public class Cola<Tipo> {
 
     public Cola() {
         lista = new Lista<Tipo>();
-        this.inicializar();
+        this.clear();
     }
 
-    public boolean encolar(Tipo dato) {
-        return lista.addDato(dato);
+    public boolean queue(Tipo dato) {
+        return lista.add(dato);
     }
 
-    public Tipo desencolar() {
-        return lista.sacarDato(0);
+    public Tipo dequeue() {
+        return lista.extract(0);
     }
 
-    public Tipo getSiguiente() {
-        return lista.getDato(0);
+    public boolean check(Tipo dato) {
+        return lista.check(dato);
     }
 
-    public boolean isVacia() {
-        return lista.getLenght() == 0 ? true : false;
+    public Tipo next() {
+        return lista.get(0);
     }
 
-    public void clear() { // TODO inicializar y limpiar redundante
+    public boolean isEmpty() {
+        return lista.size() == 0;
+    }
+
+    public void clear() { 
         lista.clear();
     }
 
-    public void inicializar() {
-        lista.clear();
-    }
-
-    public int getLength() {
-        return lista.getLenght();
+    public int size() {
+        return lista.size();
     }
 
     public void print() {
         String str = "";
-        str += "    Elementos en cola: " + getLength() + "\n";
-        str += "    Ultimo:  " + lista.getDato(getLength() - 1) + "\n"; // TODO 1 menos que el numero de elementos
-        str += "    Primero: " + lista.getDato(0) + "\n";
+        str += "    Elementos en cola: " + size() + "\n";
+        str += "    Primero: " + lista.get(0) + "\n";
+        str += "    Ultimo:  " + lista.get(size() - 1) + "\n"; 
         str += "    Cola:\n" + lista;
         System.out.println(str);
     }

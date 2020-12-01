@@ -2,20 +2,23 @@ package demo;
 
 import java.util.ArrayList;
 
+import demo.blackjack.Carta;
+import demo.blackjack.Figura;
+import demo.blackjack.Palo;
 import demo.util.io;
 import pila.Pila;
 
 public class DemoTADPila {
 
-    public static void main(String[] args) { 
-        
+    public static void main(String[] args) {
+
         testPila();
 
-	}
+    }
 
     private static void testPila() {
         System.out.println(io.box('*', 60, '*'));
-        System.out.println(io.linea(" Test aniadir Pila ", 60, "*"));
+        System.out.println(io.linea(" Test apilar ", 60, "*"));
         System.out.println(io.box('*', 60, '*'));
 
         System.out.println("Crear Pila<Object>. Podra contener cualquier tipo de objeto.");
@@ -23,116 +26,117 @@ public class DemoTADPila {
         miPila.print();
         io.esperarUsuario();
 
-        System.out.println("Crear objetos ArrayList<String> para trabajar con instancias de objeto");
-        ArrayList<String> lista0 = new ArrayList<String>();
-        // Lista lista0 = new Lista();
-        lista0.add("lista 0 cero");
-        lista0.add("lista 0 uno");
-        lista0.add("lista 0 dos");
+        System.out.println("Crear objetos ArrayList<> para trabajar con instancias de objeto");
+        ArrayList<String> listaStrings = new ArrayList<>();
+        listaStrings.add("Esto es un string - cero");
+        listaStrings.add("Esto es un string - uno");
+        listaStrings.add("Esto es un string - dos");
 
-        ArrayList<String> lista1 = new ArrayList<String>();
-        lista1.add("lista 1 cero");
-        lista1.add("lista 1 uno");
-        lista1.add("lista 1 dos");
+        ArrayList<Integer> listaIntegers = new ArrayList<>();
+        listaIntegers.add(0);
+        listaIntegers.add(1);
+        listaIntegers.add(2);
 
-        ArrayList<String> lista2 = new ArrayList<String>();
-        lista2.add("lista 2 cero");
-        lista2.add("lista 2 uno");
-        lista2.add("lista 2 dos");
+        ArrayList<Double> listaDoubles = new ArrayList<>();
+        listaDoubles.add(1.1);
+        listaDoubles.add(22.22);
+        listaDoubles.add(333.333);
 
-        ArrayList<String> lista3 = new ArrayList<String>();
-        lista3.add("lista 3 cero");
-        lista3.add("lista 3 uno");
-        lista3.add("lista 3 dos");
+        ArrayList<Boolean> listaBouleans = new ArrayList<>();
+        listaBouleans.add(true);
+        listaBouleans.add(false);
+        listaBouleans.add(true);
 
-        ArrayList<String> lista4 = new ArrayList<String>();
-        lista4.add("lista 4 cero");
-        lista4.add("lista 4 uno");
-        lista4.add("lista 4 dos");
+        ArrayList<Carta> listaCartas = new ArrayList<>();
+        listaCartas.add(new Carta(Palo.PIKAS, Figura.AS));
+        listaCartas.add(new Carta(Palo.CORAZONES, Figura.K));
+        listaCartas.add(new Carta(Palo.ROMBOS, Figura.II));
 
-        System.out.println("Aniadir un elemento \"lista0\"");
-        miPila.apilar(lista0);
+        System.out.println("Aniadir el elemento listaStrings a la pila");
+        miPila.push(listaStrings);
         miPila.print();
         io.esperarUsuario();
 
-        System.out.println("Aniadir un elemento \"lista1\"");
-        miPila.apilar(lista1);
+        System.out.println("Aniadir el elemento listaIntegers a la pila");
+        miPila.push(listaIntegers);
         miPila.print();
         io.esperarUsuario();
 
-        System.out.println("Aniadir un elemento \"lista2\"");
-        miPila.apilar(lista2);
+        System.out.println("Aniadir el elemento listaDoubles a la pila");
+        miPila.push(listaDoubles);
         miPila.print();
         io.esperarUsuario();
 
-        System.out.println("Aniadir un elemento \"lista3\"");
-        miPila.apilar(lista3);
+        System.out.println("Aniadir el elemento listaBouleans a la pila");
+        miPila.push(listaBouleans);
         miPila.print();
         io.esperarUsuario();
 
-        System.out.println("Aniadir un elemento \"lista4\"");
-        miPila.apilar(lista4);
+        System.out.println("Aniadir el elemento listaCartas a la pila");
+        miPila.push(listaCartas);
         miPila.print();
         io.esperarUsuario();
 
-        System.out.println("Aniadir un elemento \"cero\"");
-        miPila.apilar("cero");
+        System.out.println("Aniadir un elemento \"cero\" a la pila");
+        miPila.push("cero");
         miPila.print();
         io.esperarUsuario();
 
-        System.out.println("Aniadir un elemento \"uno\"");
-        miPila.apilar("uno");
+        System.out.println("Aniadir un elemento \"uno\" a la pila");
+        miPila.push("uno");
         miPila.print();
         io.esperarUsuario();
 
-        System.out.println("Aniadir un elemento \"dos\"");
-        miPila.apilar("dos");
+        System.out.println("Aniadir un elemento \"dos\" a la pila");
+        miPila.push("dos");
         miPila.print();
         io.esperarUsuario();
 
-        System.out.println("Aniadir un elemento \"tres\"");
-        miPila.apilar("tres");
+        System.out.println("Aniadir un elemento \"tres\" a la pila");
+        miPila.push("tres");
         miPila.print();
         io.esperarUsuario();
 
-        System.out.println("Aniadir un elemento \"Integer\"");
-        miPila.apilar((Integer) 25);
+        System.out.println("Aniadir un elemento \"Integer\" a la pila");
+        miPila.push((Integer) 25);
         miPila.print();
         io.esperarUsuario();
 
-        System.out.println("Aniadir un elemento \"Double\"");
-        miPila.apilar((Double) 25.125);
+        System.out.println("Aniadir un elemento \"Double\" a la pila");
+        miPila.push((Double) 25.125);
         miPila.print();
         io.esperarUsuario();
 
-        System.out.println("Aniadir un elemento \"Boolean\"");
-        miPila.apilar((Boolean) true);
+        System.out.println("Aniadir un elemento \"Boolean\" a la pila");
+        miPila.push((Boolean) true);
         miPila.print();
         io.esperarUsuario();
 
-        System.out.println("Aniadir un elemento \"String\"");
-        miPila.apilar("Esto es una cadena");
+        System.out.println("Aniadir un elemento \"String\" a la pila");
+        miPila.push("Esto es una cadena");
         miPila.print();
         io.esperarUsuario();
 
         System.out.println(io.box('*', 60, '*'));
         System.out.println(io.linea(" Test desapilar ", 60, "*"));
         System.out.println(io.box('*', 60, '*'));
+        miPila.print();
+        io.esperarUsuario();
 
-        while (!miPila.isVacia()) {
-            System.out.println("Desapilar e imprimir un elemento");
-            System.out.println(miPila.desapilar());
+        while (!miPila.isEmpty()) {
+            System.out.println("Pila no vacia - Desapilar e imprimir un elemento");
+            System.out.println(miPila.pop());
             io.esperarUsuario();
             System.out.println("Imprimir Pila");
-            System.out.println(miPila);
+            miPila.print();
             io.esperarUsuario();
         }
 
         System.out.println("Desapilar e imprimir un elemento");
-        System.out.println(miPila.desapilar());
+        System.out.println(miPila.pop());
         io.esperarUsuario();
         System.out.println("Imprimir Pila");
-        System.out.println(miPila);
+        miPila.print();
         io.esperarUsuario();
     }
 

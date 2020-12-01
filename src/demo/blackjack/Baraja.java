@@ -33,7 +33,7 @@ public class Baraja {
         Figura[] figuras = Figura.values();
         for (int i = 0; i < numeroPalos; i++) {
             for (int j = 0; j < numeroFiguras; j++) {
-                mazo.encolar(new Carta(palos[i], figuras[j]));
+                mazo.queue(new Carta(palos[i], figuras[j]));
             }
         }
     }
@@ -43,13 +43,13 @@ public class Baraja {
         Random random = new Random(System.currentTimeMillis());
 
         for (int i = 0; i < NUMERO_MEZCLAS; i++) {
-            while (!mazo.isVacia()) {
-                int insertPos = random.nextInt(aux1.getLenght() + 1);
-                aux1.addDato(mazo.desencolar(), insertPos);
+            while (!mazo.isEmpty()) {
+                int insertPos = random.nextInt(aux1.size() + 1);
+                aux1.add(mazo.dequeue(), insertPos);
             }
-            while (aux1.getLenght() > 0) {
-                int extracPos = random.nextInt(aux1.getLenght());
-                mazo.encolar(aux1.sacarDato(extracPos));
+            while (aux1.size() > 0) {
+                int extracPos = random.nextInt(aux1.size());
+                mazo.queue(aux1.extract(extracPos));
             }
         }
         return true;
@@ -72,18 +72,18 @@ public class Baraja {
     }
 
     public int getLength() {
-        return mazo.getLength();
+        return mazo.size();
     }
 
     public Carta darCarta() {
-        if (!mazo.isVacia())
-            return mazo.desencolar();
+        if (!mazo.isEmpty())
+            return mazo.dequeue();
         return null;
     }
 
     public Carta darCarta(VisibilidadCarta visibilidad) {
-        if (!mazo.isVacia()) {
-            Carta c = mazo.desencolar();
+        if (!mazo.isEmpty()) {
+            Carta c = mazo.dequeue();
             c.setVisibilidad(visibilidad);
             return c;
         }
@@ -91,7 +91,7 @@ public class Baraja {
     }
 
 	public void meterCarta(Carta c) {
-        mazo.encolar(c);
+        mazo.queue(c);
 	}
 
     @Override

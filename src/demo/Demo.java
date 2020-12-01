@@ -17,9 +17,10 @@ public class Demo {
                 System.out.println("Respuesta no aceptada...");
         } while (!(rsp.equals("y") || rsp.equals("n")));
 
-        demo.DemoUsoTADs.main(args);
         demo.DemoTADLista.main(args);
         demo.DemoTADPila.main(args);
         demo.DemoTADCola.main(args);
+
+        demo.DemoUsoTADs.main(args);
     }
 }

@@ -17,11 +17,11 @@ public class Jugador {
     }
 
     public void recibirCarta(Carta carta) {
-        mano.apilar(carta);
+        mano.push(carta);
     }
 
     public Carta sacarCarta() {
-        return mano.desapilar();
+        return mano.pop();
     }
 
     public void sumarPuntuacion(int puntos) {
@@ -41,14 +41,14 @@ public class Jugador {
     }
 
     public int getPuntuacion(boolean incluirCubiertas) {
-        if (mano.isVacia())
+        if (mano.isEmpty())
             return 0;
         puntuacion = 0;
         Pila<Carta> auxPila = new Pila<>();
         int cntAs = 0;
-        while (!mano.isVacia()) {
-            auxPila.apilar(mano.desapilar());
-            int val = auxPila.getCima().getValor(incluirCubiertas);
+        while (!mano.isEmpty()) {
+            auxPila.push(mano.pop());
+            int val = auxPila.peek().getValor(incluirCubiertas);
             puntuacion += val;
             if (val == 11) { // Si es un AS se contabiliza el AS
                 cntAs++;
@@ -61,8 +61,8 @@ public class Jugador {
             if (puntuacion > 21)
                 puntuacion -= 10;
         }
-        while (!auxPila.isVacia())
-            mano.apilar(auxPila.desapilar());
+        while (!auxPila.isEmpty())
+            mano.push(auxPila.pop());
         return puntuacion;
     }
 

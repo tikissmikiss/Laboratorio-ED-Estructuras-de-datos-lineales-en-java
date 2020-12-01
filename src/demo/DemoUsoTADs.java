@@ -28,7 +28,7 @@ public class DemoUsoTADs {
         System.out.println("- Crear la cola de jugadores");
         jugCola = new Cola<>();
         for (int i = 1; i <= NUM_JUGADORES; i++)
-            jugCola.encolar(new Jugador("Jugador_" + i));
+            jugCola.queue(new Jugador("Jugador_" + i));
         System.out.println("- Imprimir cola de jugadores");
         jugCola.print();
         io.esperarUsuario();
@@ -37,7 +37,6 @@ public class DemoUsoTADs {
         crupier = new Jugador("Crupier");
         System.out.println(crupier);
         System.out.println();
-        // io.esperarUsuario();
 
         UI.textoCrearMazo();
         mazo = new Baraja(NUMERO_PALOS, NUMERO_FIGURAS, NUMERO_BARAJAS);
@@ -59,10 +58,10 @@ public class DemoUsoTADs {
 
         System.out.println("\n           **** Comienza la partida ****");
         for (int ronda = 1; ronda <= NUM_RONDAS; ronda++) {
-            for (int i = 0; i < jugCola.getLength(); i++) {
+            for (int i = 0; i < jugCola.size(); i++) {
 
                 System.out.println("\n- Se saca un jugador de la cola para jugar la ronda");
-                final Jugador jugador = jugCola.desencolar();
+                final Jugador jugador = jugCola.dequeue();
                 io.esperarUsuario();
 
                 UI.textoRepartirCartas();
@@ -83,7 +82,7 @@ public class DemoUsoTADs {
                 UI.mostrarGanador(jugador);
 
                 UI.textoReencolarJugador(jugador);
-                jugCola.encolar(jugador);
+                jugCola.queue(jugador);
 
                 UI.textoImpresionMarcador();
                 jugCola.print();
@@ -91,11 +90,11 @@ public class DemoUsoTADs {
                 io.esperarUsuario();
 
                 UI.textoDescartarCartas();
-                while (!jugador.getMano().isVacia() || !crupier.getMano().isVacia()) {
-                    if (!jugador.getMano().isVacia())
-                        pilaDescartes.apilar(jugador.getMano().desapilar());
-                    if (!crupier.getMano().isVacia())
-                        pilaDescartes.apilar(crupier.getMano().desapilar());
+                while (!jugador.getMano().isEmpty() || !crupier.getMano().isEmpty()) {
+                    if (!jugador.getMano().isEmpty())
+                        pilaDescartes.push(jugador.getMano().pop());
+                    if (!crupier.getMano().isEmpty())
+                        pilaDescartes.push(crupier.getMano().pop());
                 }
 
                 UI.textoComprobarCartasEnMazo();
@@ -103,8 +102,8 @@ public class DemoUsoTADs {
 
                 if (mazo.getLength() < 10) {
                     UI.textoReconstruirMazo();
-                    while (!pilaDescartes.isVacia()) {
-                        mazo.meterCarta(pilaDescartes.desapilar());
+                    while (!pilaDescartes.isEmpty()) {
+                        mazo.meterCarta(pilaDescartes.pop());
                     }
                     mazo.mezclar();
                 }
