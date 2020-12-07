@@ -7,7 +7,11 @@ import demo.util.io;
 import lista.Lista;
 
 public class DemoTADLista {
+    private static int ancho=60;
+
     public static void main(String[] args) {
+
+        cabecera();
 
         testAdd();
         testPrint();
@@ -19,6 +23,19 @@ public class DemoTADLista {
         testDatosCompuestos();
         testNodoVacio();
 
+    }
+
+    private static void cabecera() {
+        System.out.println();
+		System.out.println(io.box('=', ancho, '='));
+		System.out.println(io.linea("             - Estructuras de datos lineales -", ancho, "|"));
+		System.out.println(io.box('=', ancho, '|'));
+		System.out.println(io.linea("                 Lista doblemente enlazada", ancho, "|"));
+		System.out.println(io.box('-', ancho, '|'));
+		System.out.println(io.parrafo("Testeo de funcionalidades de la lista doblemente enlaza.", ancho, "|", 1));
+		System.out.println(io.linea("   por: José Herce Preciado", ancho, "|"));
+		System.out.println(io.box('=', ancho, '='));
+		System.out.println();
     }
 
     private static void testNodoVacio() {

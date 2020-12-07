@@ -9,7 +9,19 @@ import demo.blackjack.Palo;
 import demo.util.io;
 
 public class DemoTADCola {
+    private static int ancho = 60;
+
     public static void main(String[] args) {
+        System.out.println();
+        System.out.println(io.box('=', ancho, '='));
+        System.out.println(io.linea("             - Estructuras de datos lineales -", ancho, "|"));
+        System.out.println(io.box('=', ancho, '|'));
+        System.out.println(io.linea("                       Cola dinamica", ancho, "|"));
+        System.out.println(io.box('-', ancho, '|'));
+        System.out.println(io.parrafo("Testeo de funcionalidades de la cola dinamica.", ancho, "|", 1));
+        System.out.println(io.linea("   por: José Herce Preciado", ancho, "|"));
+        System.out.println(io.box('=', ancho, '='));
+        System.out.println();
 
         testCola();
 

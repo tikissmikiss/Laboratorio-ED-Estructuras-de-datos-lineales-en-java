@@ -10,10 +10,26 @@ import pila.Pila;
 
 public class DemoTADPila {
 
+    private static int ancho = 60;
+
     public static void main(String[] args) {
+        cabecera();
 
         testPila();
 
+    }
+
+    private static void cabecera() {
+        System.out.println();
+        System.out.println(io.box('=', ancho, '='));
+        System.out.println(io.linea("             - Estructuras de datos lineales -", ancho, "|"));
+        System.out.println(io.box('=', ancho, '|'));
+        System.out.println(io.linea("                       Pila dinamica", ancho, "|"));
+        System.out.println(io.box('-', ancho, '|'));
+        System.out.println(io.parrafo("Testeo de funcionalidades de la pila dinamica.", ancho, "|", 1));
+        System.out.println(io.linea("   por: José Herce Preciado", ancho, "|"));
+        System.out.println(io.box('=', ancho, '='));
+        System.out.println();
     }
 
     private static void testPila() {
