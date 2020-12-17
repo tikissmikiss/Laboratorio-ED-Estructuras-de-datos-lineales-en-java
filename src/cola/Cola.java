@@ -4,57 +4,46 @@ import lista.Lista;
 
 public class Cola<Tipo> {
     private Lista<Tipo> lista;
-    private Tipo primero;
-    private Tipo ultimo;
-    private int length;
 
     public Cola() {
         lista = new Lista<Tipo>();
-        this.inicializar();
+        this.clear();
     }
 
-    public boolean encolar(Tipo dato) {
-        ultimo = dato;
-        length = lista.getLenght() + 1;
-        return lista.addDato(dato);
+    public boolean queue(Tipo dato) {
+        return lista.add(dato);
     }
 
-    public Tipo desencolar() {
-        Tipo dato = lista.sacarDato(0);
-        primero = lista.getDato(0);
-        length = lista.getLenght();
-        return dato;
+    public Tipo dequeue() {
+        return lista.extract(0);
     }
 
-    public Tipo getSiguiente() {
-        return lista.getDato(0);
+    public boolean check(Tipo dato) {
+        return lista.check(dato);
     }
 
-    public boolean isVacia() {
-        return lista.getLenght() == 0 ? true : false;
+    public Tipo next() {
+        return lista.get(0);
     }
 
-    public void limpiar() { //TODO inicializar y limpiar redundante
+    public boolean isEmpty() {
+        return lista.size() == 0;
+    }
+
+    public void clear() { 
         lista.clear();
     }
 
-    public void inicializar() {
-        length = 0;
-        primero = null;
-        ultimo = null;
-        lista.clear();
-    }
-
-    public int getLength() {
-        return length;
+    public int size() {
+        return lista.size();
     }
 
     public void print() {
         String str = "";
-        str += " n:" + length + "\n";
-        str += " ultimo:" + ultimo + "\n";
-        str += " primero:" + primero + "\n";
-        str += " lista:\n" + lista;
+        str += "    Elementos en cola: " + size() + "\n";
+        str += "    Primero: " + lista.get(0) + "\n";
+        str += "    Ultimo:  " + lista.get(size() - 1) + "\n"; 
+        str += "    Cola:\n" + lista;
         System.out.println(str);
     }
 

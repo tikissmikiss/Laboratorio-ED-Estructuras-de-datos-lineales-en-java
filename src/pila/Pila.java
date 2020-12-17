@@ -7,42 +7,42 @@ public class Pila<Tipo> {
 
     public Pila() {
         lista = new Lista<Tipo>();
-        this.inicializar();
+        this.clear();
     }
 
-    public boolean apilar(Tipo dato) {
-        return lista.addDato(dato);
+    public boolean push(Tipo dato) {
+        return lista.add(dato);
     }
 
-    public Tipo desapilar() {
-            return lista.sacarDato(lista.getLenght());
-        }
-
-    public Tipo getCima() {
-        return lista.getDato(lista.getLenght() - 1);
+    public Tipo pop() {
+        return lista.extract(lista.size() - 1);
     }
 
-    public int getLength() {
-        return lista.getLenght();
+    public Tipo peek() {
+        return lista.get(lista.size() - 1);
     }
 
-    public boolean isVacia() {
-        return lista.getLenght() == 0 ? true : false;
+    public boolean check(Tipo dato) {
+        return lista.check(dato);
     }
 
-    public void limpiar() { // TODO es redundante
+    public int size() {
+        return lista.size();
+    }
+
+    public boolean isEmpty() {
+        return lista.size() == 0;
+    }
+
+    public void clear() {
         lista.clear();
     }
 
-    public void inicializar() {
-        lista.clear();
-    }
-
-    public void imprimir() {
+    public void print() {
         String str = "";
-        str += " n:" + getLength() + "\n";
-        str += " cima:" + getCima() + "\n";
-        str += " lista:\n" + lista;
+        str += "    n:" + size() + "\n";
+        str += "    cima:" + peek() + "\n";
+        str += "    Elemento en Pila:\n" + lista;
         System.out.println(str);
     }
 
